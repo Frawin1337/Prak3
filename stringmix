@@ -1,0 +1,52 @@
+#include <stdio.h>
+#include <string.h>
+char erst[32];
+char zweit[32];
+int x,y,z;
+char ausgabe[64];
+char hilfe[1];
+
+char* mix(char erst[],char zweit[]) {
+    if (strlen(erst) > strlen(zweit)) {                         //ueberprueft ob der erste string länger als der zweite ist 
+        x = strlen(zweit);
+        y = strlen(erst) - strlen(zweit);
+        z = 1;
+    } else if (strlen(erst) < strlen(zweit)) {                  //ueberprueft ob der zweite string länger als der erste ist  
+        x = strlen(erst);
+        y = strlen(zweit) - strlen(erst);
+        z = 0;
+    } else{
+        x = strlen(erst);
+        y = 0;
+        z = 2;
+    }
+    for (int i = 0; i < x; i++) {                             //speichert der Reihe nach die einzelnen Buchstaben ab
+        hilfe[0] = zweit[i];                                  //uebertraegt sie in ausgabe
+        strcat(ausgabe,hilfe);
+        hilfe[0] = erst[i];
+        strcat(ausgabe,hilfe);
+    }
+    if (z == 1) {
+        for (int i = 0; i <= y; i++) {
+            hilfe[0] = erst[i + x];
+            strcat(ausgabe,hilfe);
+        }
+    }
+    if (z == 0) {
+        for (int i = 0; i <= y; i++) {
+            hilfe[0] = zweit[i + x];
+            strcat(ausgabe,hilfe);
+        }
+    }
+    return ausgabe;
+}
+
+int main() {
+    printf("Bitte ersten String eingeben!\n");
+    scanf("%s", &erst);
+    printf("Bitte zweiten String eingeben!\n");
+    scanf("%s", &zweit);
+    printf("%s",mix(erst, zweit));
+
+    return 0;
+}
