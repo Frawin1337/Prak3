@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+int count[256], i = 0;
+char string[];
+
+void output(int n);
+
+int main() {
+
+    printf("Bitte Satz eingeben!\n");
+    scanf("%s", &string);
+
+    while (string[i] != '\0') {   //bis der Sentinel erreicht wird
+        count[string[i]] = count[string[i]] + 1;   //count an der Stelle des Buchstabens hochzählen
+        i++;
+    }
+
+    for (int x = i; x > 0; x--) {  //für X > Anzahl der Buchstaben im String
+        output(x);
+    }
+
+    return 0;
+}
+
+void output(int n) {
+
+    for (int y = 0; y < 256; y++) {  //Count durchsuchen nach Buchstaben mit X als Wert
+        if (count[y] == n) {
+            printf("%c %d\n", y, count[y]); //Ausgabe von Buchstaben und Anzahl
+        }
+    }
+}
